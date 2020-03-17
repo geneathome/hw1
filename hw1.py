@@ -57,9 +57,9 @@ C0R190_result=[]
 C0X260_result=[]
 
 for x in data:
-    if(x['PRES']=='-999.000')or (x['PRES']=='-999.00'):
-        aBC=10000000000
-    else:
+    if(x['PRES']=='-99.000')or (x['PRES']=='-999.00'):         #ignore them
+        abc=1000                                                #empty is not allowed
+    else:                                                       #find what we want
         if(x['station_id']=='C0A880'):
             C0A880_result.append(float(x['PRES']))
         if(x['station_id']=='C0F9A0'):
@@ -70,7 +70,7 @@ for x in data:
             C0R190_result.append(float(x['PRES']))
         if(x['station_id']=='C0X260'):
             C0X260_result.append(float(x['PRES']))
-if len(C0A880_result) !=0:
+if len(C0A880_result) !=0:                                                  #compute the mean result
     target_data.append(['C0A880',sum(C0A880_result)/len(C0A880_result)])
 else:
     target_data.append(['C0A880','None'])
