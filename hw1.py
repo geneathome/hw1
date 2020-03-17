@@ -56,40 +56,50 @@ C0G640_result=[]
 C0R190_result=[]
 C0X260_result=[]
 
-for x in data:
-    if(x['PRES']=='-99.000')or (x['PRES']=='-999.00'):         #ignore them
-        abc=1000                                                #empty is not allowed
-    else:                                                       #find what we want
-        if(x['station_id']=='C0A880'):
-            C0A880_result.append(float(x['PRES']))
-        if(x['station_id']=='C0F9A0'):
-            C0F9A0_result.append(float(x['PRES']))
-        if(x['station_id']=='C0G640'):
-            C0G640_result.append(float(x['PRES']))
-        if(x['station_id']=='C0R190'):
-            C0R190_result.append(float(x['PRES']))
-        if(x['station_id']=='C0X260'):
-            C0X260_result.append(float(x['PRES']))
-if len(C0A880_result) !=0:                                                  #compute the mean result
-    target_data.append(['C0A880',sum(C0A880_result)/len(C0A880_result)])
-else:
+for rowtop in data:
+    if(rowtop['PRES']!='-99.000')and (rowtop['PRES']!='-999.00'):         #ignore them
+        if(rowtop['station_id']=='C0A880'):
+            C0A880_result.append(float(rowtop['PRES']))
+        if(rowtop['station_id']=='C0F9A0'):
+            C0F9A0_result.append(float(rowtop['PRES']))
+        if(rowtop['station_id']=='C0G640'):
+            C0G640_result.append(float(rowtop['PRES']))
+        if(rowtop['station_id']=='C0R190'):
+            C0R190_result.append(float(rowtop['PRES']))
+        if(rowtop['station_id']=='C0X260'):
+            C0X260_result.append(float(rowtop['PRES']))
+
+COA880sum=sum(C0A880_result)
+C0F9A0sum=sum(C0F9A0_result)
+C0G640sum=sum(C0G640_result)
+C0R190sum=sum(C0R190_result)
+C0X260sum=sum(C0X260_result)
+
+if len(C0A880_result) ==0:                                                  
     target_data.append(['C0A880','None'])
-if len(C0F9A0_result) !=0:
-    target_data.append(['C0F9A0',sum(C0F9A0_result)/len(C0F9A0_result)])
 else:
+    target_data.append(['C0A880',COA880sum/len(C0A880_result)])
+if len(C0F9A0_result) ==0:
     target_data.append(['C0F9A0','None'])
-if len(C0G640_result) !=0:
-    target_data.append(['C0G640',sum(C0G640_result)/len(C0G640_result)])
 else:
+    target_data.append(['C0F9A0',C0F9A0sum/len(C0F9A0_result)])
+    
+if len(C0G640_result) ==0:
     target_data.append(['C0g640','None'])
-if len(C0A880_result) !=0:
-    target_data.append(['C0R190',sum(C0R190_result)/len(C0R190_result)])
-else:
+else:   
+    target_data.append(['C0G640',C0G640sum/len(C0G640_result)])
+
+    
+if len(C0A880_result) ==0:
     target_data.append(['C0R190','None'])
-if len(C0A880_result) !=0:
-    target_data.append(['C0X260',sum(C0X260_result)/len(C0X260_result)])
 else:
+    target_data.append(['C0R190',C0G640sum/len(C0R190_result)])
+
+    
+if len(C0A880_result) ==0:
     target_data.append(['C0X260','None'])
+else:
+    target_data.append(['C0X260',C0X260sum/len(C0X260_result)])
 
         
 
