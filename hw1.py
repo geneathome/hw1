@@ -49,60 +49,50 @@ with open(cwb_filename) as csvfile:
 
 # Retrive ten data points from the beginning.
 
-target_data = []
-C0A880_result=[]
-C0F9A0_result=[]
-C0G640_result=[]
-C0R190_result=[]
-C0X260_result=[]
+result=[]
+C0A880=[]
+C0F9A0=[]
+C0G640=[]
+C0R190=[]
+C0X260=[]
 
-for rowtop in data:
-    if(rowtop['PRES']!='-99.000')and (rowtop['PRES']!='-999.00'):         #ignore them
-        if(rowtop['station_id']=='C0A880'):
-            C0A880_result.append(float(rowtop['PRES']))
-        if(rowtop['station_id']=='C0F9A0'):
-            C0F9A0_result.append(float(rowtop['PRES']))
-        if(rowtop['station_id']=='C0G640'):
-            C0G640_result.append(float(rowtop['PRES']))
-        if(rowtop['station_id']=='C0R190'):
-            C0R190_result.append(float(rowtop['PRES']))
-        if(rowtop['station_id']=='C0X260'):
-            C0X260_result.append(float(rowtop['PRES']))
+for i in range(len(data)):
+    if data[i]['PRES']=='-99.000' or data[i]['PRES']=='-999.000':         
+        abc=0;
+    else:
+        if data[i]['station_id']=='C0A880':
+            C0A880.append(float(data[i]['PRES']))
+        if data[i]['station_id']=='C0F9A0':
+            C0F9A0.append(float(data[i]['PRES']))
+        if data[i]['station_id']=='C0G640':
+            C0G640.append(float(data[i]['PRES']))
+        if data[i]['station_id']=='C0R190':
+            C0R190.append(float(data[i]['PRES']))
+        if data[i]['station_id']=='C0X260':
+            C0X260.append(float(data[i]['PRES']))
 
-COA880sum=sum(C0A880_result)
-C0F9A0sum=sum(C0F9A0_result)
-C0G640sum=sum(C0G640_result)
-C0R190sum=sum(C0R190_result)
-C0X260sum=sum(C0X260_result)
-
-if len(C0A880_result) ==0:                                                  
-    target_data.append(['C0A880','None'])
+if (len(C0A880) == 0):
+    result.append(['C0A880','None'])
 else:
-    target_data.append(['C0A880',COA880sum/len(C0A880_result)])
-if len(C0F9A0_result) ==0:
-    target_data.append(['C0F9A0','None'])
+    result.append(float(sum(C0A880)/len(C0A880)))
+if (len(C0F9A0) == 0):
+    result.append(['C0F9A0','None'])
 else:
-    target_data.append(['C0F9A0',C0F9A0sum/len(C0F9A0_result)])
+    result.append(float(sum(C0F9A0)/len(C0F9A0)))
+if (len(C0G640) == 0):
+    result.append(['C0G640','None'])
+else:
+    result.append(float(sum(C0G640)/len(C0G640)))
+if (len(C0R190) == 0):
+    result.append(['C0R190','None'])
+else:
+    result.append(float(sum(C0R190)/len(C0R190)))
+if (len(C0X260) == 0):
+    result.append(['C0X260','None'])
+else:
+    result.append(float(sum(C0X260)/len(C0X260)))    
     
-if len(C0G640_result) ==0:
-    target_data.append(['C0g640','None'])
-else:   
-    target_data.append(['C0G640',C0G640sum/len(C0G640_result)])
-
-    
-if len(C0A880_result) ==0:
-    target_data.append(['C0R190','None'])
-else:
-    target_data.append(['C0R190',C0G640sum/len(C0R190_result)])
-
-    
-if len(C0A880_result) ==0:
-    target_data.append(['C0X260','None'])
-else:
-    target_data.append(['C0X260',C0X260sum/len(C0X260_result)])
-
-        
-
+ 
 #=======================================
 
 
@@ -112,6 +102,6 @@ else:
 
 # Print result
 
-print(target_data)
 
+print(result)
 #========================================
